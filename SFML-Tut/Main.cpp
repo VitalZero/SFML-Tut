@@ -6,6 +6,11 @@ int main()
 
 	while ( window.isOpen() )
 	{
+		sf::RectangleShape rectangle( sf::Vector2f( 128.0f, 128.0f ) );
+		rectangle.setPosition( 320, 240 );
+		rectangle.setFillColor( sf::Color::Red );
+		rectangle.setOrigin( rectangle.getSize().x / 2, rectangle.getSize().y / 2 );
+
 		sf::Event event;
 		while ( window.pollEvent( event ) )
 		{
@@ -17,7 +22,7 @@ int main()
 
 		window.clear( sf::Color::Black );
 		// init draw
-
+		window.draw( rectangle );
 		// end draw
 		window.display();
 	}
