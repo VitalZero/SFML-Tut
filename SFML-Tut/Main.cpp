@@ -29,6 +29,7 @@ int main()
 		if ( (sprite.getPosition().x + (size.x / 2) >= window.getSize().x && increment.x > 0) ||
 			(sprite.getPosition().x - (size.x / 2) < 0 && increment.x < 0) )
 		{
+			sprite.setColor( sf::Color( 0, 0, 0, 150 ) );
 			increment.x = -increment.x;
 		}
 		if ( (sprite.getPosition().y + (size.y / 2) >= window.getSize().y && increment.y > 0) ||
