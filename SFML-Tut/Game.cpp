@@ -21,6 +21,11 @@ void Game::Update()
 {
 	window.Update();
 	MoveMushroom();
+
+	if ( elapsed.asSeconds() >= frameTime )
+	{
+		elapsed -= sf::seconds( frameTime );
+	}
 }
 
 void Game::Render()

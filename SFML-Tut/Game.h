@@ -23,4 +23,6 @@ private:
 	sf::Vector2f increment;
 	sf::Clock clock;
 	sf::Time elapsed;
+	float frameTime = 1.0f / 60.0f;
+	float constantFT = 0.0f;
 };
