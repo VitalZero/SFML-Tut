@@ -12,9 +12,9 @@ public:
 	void BeginDraw();
 	void EndDraw();
 	void Update();
-	bool IsDone();
-	bool IsFullScreen();
-	sf::Vector2u GetWindowSize();
+	bool IsDone() const;
+	bool IsFullScreen() const;
+	sf::Vector2u GetWindowSize() const;
 	void ToggleFullScreen();
 	void Draw( sf::Drawable& drawable );
 

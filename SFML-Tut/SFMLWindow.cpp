@@ -1,10 +1,10 @@
-#include "Window.h"
+#include "SFMLWindow.h"
 
 Window::Window() { Setup( "Window", sf::Vector2u( 640, 480 ) ); }
 
 Window::Window( const std::string & title, const sf::Vector2u & size )
 {
-	Setup( title, windowSize );
+	Setup( title, size);
 }
 
 Window::~Window() { Destroy(); }
@@ -38,29 +38,26 @@ void Window::EndDraw()
 
 void Window::Update()
 {
-	while ( window.isOpen() )
+	sf::Event event;
+	while ( window.pollEvent( event ) )
 	{
-		sf::Event event;
-		while ( window.pollEvent( event ) )
+		if ( event.type == sf::Event::Closed )
 		{
-			if ( event.type == sf::Event::Closed )
-			{
-				isDone = true;
-			}
-			else if ( event.type == sf::Event::KeyPressed &&
-				event.key.code == sf::Keyboard::F5 )
-			{
-				ToggleFullScreen();
-			}
+			isDone = true;
+		}
+		else if ( event.type == sf::Event::KeyPressed &&
+			event.key.code == sf::Keyboard::F5 )
+		{
+			ToggleFullScreen();
 		}
 	}
 }
 
-bool Window::IsDone() { return isDone; }
+bool Window::IsDone() const { return isDone; }
 
-bool Window::IsFullScreen() { return isFullScreen; }
+bool Window::IsFullScreen() const { return isFullScreen; }
 
-sf::Vector2u Window::GetWindowSize() { return windowSize; }
+sf::Vector2u Window::GetWindowSize() const { return windowSize; }
 
 void Window::ToggleFullScreen()
 {
