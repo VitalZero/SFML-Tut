@@ -12,6 +12,8 @@ public:
 	void Update();
 	void Render();
 	Window* GetWindow();
+	sf::Time GetElapsed();
+	void RestartClock();
 
 private:
 	Window window;
@@ -19,4 +21,6 @@ private:
 	sf::Texture mushroomTexture;
 	sf::Sprite mushroom;
 	sf::Vector2f increment;
+	sf::Clock clock;
+	sf::Time elapsed;
 };

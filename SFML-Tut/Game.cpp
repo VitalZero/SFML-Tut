@@ -10,7 +10,7 @@ Game::Game()
 	}
 
 	mushroom.setTexture( mushroomTexture );
-	increment = sf::Vector2f( 4.f, 4.f );
+	increment = sf::Vector2f( 400.f, 400.f );
 }
 
 void Game::HandleInput()
@@ -35,6 +35,16 @@ Window * Game::GetWindow()
 	return &window;
 }
 
+sf::Time Game::GetElapsed()
+{
+	return elapsed;
+}
+
+void Game::RestartClock()
+{
+	elapsed = clock.restart();
+}
+
 void Game::MoveMushroom()
 {
 	sf::Vector2u windowSize = window.GetWindowSize();
@@ -50,5 +60,7 @@ void Game::MoveMushroom()
 	{
 		increment.y = -increment.y;
 	}
-	mushroom.setPosition( mushroom.getPosition() + increment );
+	float dt = elapsed.asSeconds();
+
+	mushroom.setPosition( mushroom.getPosition() + increment * dt );
 }
