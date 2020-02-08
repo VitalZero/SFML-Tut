@@ -17,7 +17,7 @@ class Snake
 {
 public:
 	Snake( int blockSize );
-	~Snake();
+	~Snake() = default;
 
 public:
 	void SetDirection( Direction dir );
@@ -46,7 +46,7 @@ private:
 	Direction dir;
 	int speed;
 	int lives;
-	int score;
+	int score = 0;
 	bool lost;
 	sf::RectangleShape bodyRect;
 };
