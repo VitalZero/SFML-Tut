@@ -20,6 +20,7 @@ void Game::HandleInput()
 void Game::Update()
 {
 	window.Update();
+
 	MoveMushroom();
 
 	if ( elapsed.asSeconds() >= frameTime )
