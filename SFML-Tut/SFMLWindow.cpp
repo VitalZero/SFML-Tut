@@ -70,3 +70,8 @@ void Window::Draw( sf::Drawable & drawable )
 {
 	window.draw( drawable );
 }
+
+sf::RenderWindow* Window::GetRenderWindow()
+{
+	return &window;
+}
