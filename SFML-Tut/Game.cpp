@@ -2,37 +2,64 @@
 
 Game::Game()
 	:
-	window( "Chapter 2", { 640, 480 } )
+	window( "Snake!", { 640, 480 } ),
+	snake( world.GetBlockSize() ),
+	world( sf::Vector2u(640, 480) )
 {
-	if ( !mushroomTexture.loadFromFile( "img/Mushroom.png" ) )
-	{
-		throw("Error loading img Mushroom.png");
-	}
-
-	mushroom.setTexture( mushroomTexture );
-	increment = sf::Vector2f( 400.f, 400.f );
+	clock.restart();
+	srand( time( nullptr ) );
+	elapsed = 0.0f;
 }
 
 void Game::HandleInput()
 {
+	if ( sf::Keyboard::isKeyPressed( sf::Keyboard::Up ) &&
+		snake.GetDirection() != Direction::Down )
+	{
+		snake.SetDirection( Direction::Up );
+	}
+	else if ( sf::Keyboard::isKeyPressed( sf::Keyboard::Down ) &&
+		snake.GetDirection() != Direction::Up )
+	{
+		snake.SetDirection( Direction::Down );
+	}
+	else if ( sf::Keyboard::isKeyPressed( sf::Keyboard::Left ) &&
+		snake.GetDirection() != Direction::Right )
+	{
+		snake.SetDirection( Direction::Left );
+	}
+	else if ( sf::Keyboard::isKeyPressed( sf::Keyboard::Right ) &&
+		snake.GetDirection() != Direction::Left )
+	{
+		snake.SetDirection( Direction::Right );
+	}
 }
 
 void Game::Update()
 {
 	window.Update();
 
-	MoveMushroom();
+	float timeStep = 1.0f / snake.GetSpeed();
 
-	if ( elapsed.asSeconds() >= frameTime )
+	if ( elapsed >= timeStep )
 	{
-		elapsed -= sf::seconds( frameTime );
+		snake.Tick();
+		world.Update( snake );
+		elapsed -= timeStep;
+		if ( snake.HasLost() )
+		{
+			snake.Reset();
+		}
 	}
 }
 
 void Game::Render()
 {
 	window.BeginDraw();
-	window.Draw( mushroom );
+
+	world.Render( *window.GetRenderWindow() );
+	snake.Render( *window.GetRenderWindow() );
+
 	window.EndDraw();
 }
 
@@ -43,30 +70,10 @@ Window * Game::GetWindow()
 
 sf::Time Game::GetElapsed()
 {
-	return elapsed;
+	return clock.getElapsedTime();
 }
 
 void Game::RestartClock()
 {
-	elapsed = clock.restart();
-}
-
-void Game::MoveMushroom()
-{
-	sf::Vector2u windowSize = window.GetWindowSize();
-	sf::Vector2u textureSize = mushroomTexture.getSize();
-
-	if ( (mushroom.getPosition().x >= windowSize.x - textureSize.x  && increment.x > 0) ||
-		(mushroom.getPosition().x < 0 && increment.x < 0) )
-	{
-		increment.x = -increment.x;
-	}
-	if ( (mushroom.getPosition().y >= windowSize.y - textureSize.y && increment.y > 0) ||
-		(mushroom.getPosition().y < 0 && increment.y < 0) )
-	{
-		increment.y = -increment.y;
-	}
-	float dt = elapsed.asSeconds();
-
-	mushroom.setPosition( mushroom.getPosition() + increment * dt );
+	elapsed += clock.restart().asSeconds();
 }

@@ -63,7 +63,7 @@ void World::Update( Snake & player )
 	if ( player.GetPosition().x <= 0 ||
 		player.GetPosition().y <= 0 ||
 		player.GetPosition().x >= gridSizeX - 1 ||
-		player.GetPosition().x >= gridSizeY - 1)
+		player.GetPosition().y >= gridSizeY - 1)
 	{
 		player.Lose();
 	}

@@ -82,7 +82,7 @@ void Snake::Extend()
 			}
 			else if ( tailHead.position.y == tailBone.position.y )
 			{
-				if ( tailHead.position.x > tailHead.position.x )
+				if ( tailHead.position.x > tailBone.position.x )
 				{
 					snakeBody.push_back( SnakeSegment( tailHead.position.x + 1, tailHead.position.y ) );
 				}
@@ -124,7 +124,7 @@ void Snake::Reset()
 
 	SetDirection( Direction::None );
 
-	speed = 15;
+	speed = 5;
 	lives = 3;
 	score = 0;
 	lost = false;
@@ -132,7 +132,7 @@ void Snake::Reset()
 
 void Snake::Move()
 {
-	for ( unsigned int i = snakeBody.size() - 1; i > 0; ++i )
+	for ( unsigned int i = snakeBody.size() - 1; i > 0; --i )
 	{
 		snakeBody[i].position = snakeBody[i - 1].position;
 	}
@@ -194,7 +194,7 @@ void Snake::Render( sf::RenderWindow & window )
 		bodyRect.setFillColor( sf::Color::Green );
 		for ( auto itr = snakeBody.begin() + 1; itr != snakeBody.end(); ++itr )
 		{
-			bodyRect.setPosition( itr->position.x * size, itr->position.y + size );
+			bodyRect.setPosition( itr->position.x * size, itr->position.y * size );
 			window.draw( bodyRect );
 		}
 	}
@@ -202,7 +202,7 @@ void Snake::Render( sf::RenderWindow & window )
 
 void Snake::CheckCollision()
 {
-	if ( snakeBody.size() >= 5 )
+	if ( snakeBody.size() >= 4 )
 	{
 		SnakeSegment& head = snakeBody.front();
 

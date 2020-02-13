@@ -1,5 +1,6 @@
 #pragma once
 #include "SFMLWindow.h"
+#include "World.h"
 
 class Game
 {
@@ -17,12 +18,10 @@ public:
 
 private:
 	Window window;
-	void MoveMushroom();
-	sf::Texture mushroomTexture;
-	sf::Sprite mushroom;
-	sf::Vector2f increment;
 	sf::Clock clock;
-	sf::Time elapsed;
+	float elapsed;
 	float frameTime = 1.0f / 60.0f;
 	float constantFT = 0.0f;
+	World world;
+	Snake snake;
 };

@@ -18,7 +18,7 @@ int main()
 		float fps = 1.0f / currentTime; // fps
 		lastTime = currentTime; // fps
 
-		std::cout << "FPS: " << fps << "\n"; // fps
+		//std::cout << "FPS: " << fps << "\n"; // fps
 	}
 
 	return 0;
