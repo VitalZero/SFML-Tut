@@ -18,6 +18,26 @@ Direction Snake::GetDirection() const
 	return dir;
 }
 
+Direction Snake::GetPhysicalDirection()
+{
+	if ( snakeBody.size() <= 1 )
+	{
+		return Direction::None;
+	}
+	SnakeSegment& head = snakeBody[0];
+	SnakeSegment& neck = snakeBody[1];
+
+	if ( head.position.x == neck.position.x )
+	{
+		return (head.position.y > neck.position.y ? Direction::Down : Direction::Up);
+	}
+	else if ( head.position.y == neck.position.y )
+	{
+		return (head.position.x > neck.position.x ? Direction::Right : Direction::Left);
+	}
+	return Direction::None;
+}
+
 int Snake::GetSpeed() const
 {
 	return speed;

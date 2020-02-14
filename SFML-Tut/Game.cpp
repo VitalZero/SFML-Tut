@@ -14,22 +14,22 @@ Game::Game()
 void Game::HandleInput()
 {
 	if ( sf::Keyboard::isKeyPressed( sf::Keyboard::Up ) &&
-		snake.GetDirection() != Direction::Down )
+		snake.GetPhysicalDirection() != Direction::Down )
 	{
 		snake.SetDirection( Direction::Up );
 	}
 	else if ( sf::Keyboard::isKeyPressed( sf::Keyboard::Down ) &&
-		snake.GetDirection() != Direction::Up )
+		snake.GetPhysicalDirection() != Direction::Up )
 	{
 		snake.SetDirection( Direction::Down );
 	}
 	else if ( sf::Keyboard::isKeyPressed( sf::Keyboard::Left ) &&
-		snake.GetDirection() != Direction::Right )
+		snake.GetPhysicalDirection() != Direction::Right )
 	{
 		snake.SetDirection( Direction::Left );
 	}
 	else if ( sf::Keyboard::isKeyPressed( sf::Keyboard::Right ) &&
-		snake.GetDirection() != Direction::Left )
+		snake.GetPhysicalDirection() != Direction::Left )
 	{
 		snake.SetDirection( Direction::Right );
 	}
