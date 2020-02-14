@@ -25,7 +25,7 @@ void Textbox::Setup( int visible, int charSize, int width, sf::Vector2f screenPo
 	content.setFont( font );
 	content.setString( "" );
 	content.setCharacterSize( charSize );
-	content.setFillColor( sf::Color::White );
+	content.setFillColor( sf::Color( 255, 255, 255, 150 ) );
 	content.setPosition( screenPos + offset);
 
 	backdrop.setSize( sf::Vector2f( width, (visible* charSize * 1.2f) ) );

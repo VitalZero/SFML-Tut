@@ -1,4 +1,7 @@
 #include "EventManager.h"
+#include <fstream>
+#include <iostream>
+#include <sstream>
 
 EventManager::EventManager()
 	:
@@ -113,54 +116,55 @@ void EventManager::HandleEvent( sf::Event & event )
 
 void EventManager::Update()
 {
-	if ( hasFocus ) {}
-
-	for ( auto& itrBind : bindings )
+	if ( hasFocus )
 	{
-		Binding* bind = itrBind.second;
-
-		for ( auto& itrEvent : bind->events )
+		for ( auto& itrBind : bindings )
 		{
-			switch ( itrEvent.first )
-			{
-			case EventType::Keyboard:
-				if ( sf::Keyboard::isKeyPressed(sf::Keyboard::Key(itrEvent.second.code) ) )
-				{
-					if ( bind->details.keyCode != -1 )
-					{
-						bind->details.keyCode = itrEvent.second.code;
-					}
-					++(bind->c);
-				}
-				break;
-			case EventType::Mouse:
-				if ( sf::Mouse::isButtonPressed( sf::Mouse::Button( itrEvent.second.code ) ) )
-				{
-					if ( bind->details.keyCode != -1 )
-					{
-						bind->details.keyCode = itrEvent.second.code;
-					}
-					++(bind->c);
-				}
-				break;
-			case EventType::Joystick:
-				break;
+			Binding* bind = itrBind.second;
 
-			default:
-				break;
-			}
-		}
-
-		if ( bind->events.size() == bind->c )
-		{
-			auto callItr = callbacks.find( bind->name );
-			if ( callItr != callbacks.end() )
+			for ( auto& itrEvent : bind->events )
 			{
-				callItr->second( &bind->details );
+				switch ( itrEvent.first )
+				{
+				case EventType::Keyboard:
+					if ( sf::Keyboard::isKeyPressed( sf::Keyboard::Key( itrEvent.second.code ) ) )
+					{
+						if ( bind->details.keyCode != -1 )
+						{
+							bind->details.keyCode = itrEvent.second.code;
+						}
+						++(bind->c);
+					}
+					break;
+				case EventType::Mouse:
+					if ( sf::Mouse::isButtonPressed( sf::Mouse::Button( itrEvent.second.code ) ) )
+					{
+						if ( bind->details.keyCode != -1 )
+						{
+							bind->details.keyCode = itrEvent.second.code;
+						}
+						++(bind->c);
+					}
+					break;
+				case EventType::Joystick:
+					break;
+
+				default:
+					break;
+				}
 			}
+
+			if ( bind->events.size() == bind->c )
+			{
+				auto callItr = callbacks.find( bind->name );
+				if ( callItr != callbacks.end() )
+				{
+					callItr->second( &bind->details );
+				}
+			}
+			bind->c = 0;
+			bind->details.Clear();
 		}
-		bind->c = 0;
-		bind->details.Clear();
 	}
 }
 
@@ -171,4 +175,58 @@ sf::Vector2i EventManager::GetMousePos( sf::RenderWindow* window )
 
 void EventManager::LoadBindings()
 {
+	std::string delimiter = ":";
+
+	std::ifstream bindings;
+	bindings.open( "keys.cfg" );
+	if ( bindings )
+	{
+		std::string line;
+		while ( std::getline( bindings, line ) )
+		{
+			std::stringstream keyStream( line );
+			std::string callbackName;
+
+			keyStream >> callbackName;
+
+			Binding* bind = new Binding( callbackName );
+
+			while ( !keyStream.eof() )
+			{
+				std::string keyVal;
+				keyStream >> keyVal;
+				
+				int start = 0;
+				int end = keyVal.find( delimiter );
+
+				if ( end == std::string::npos )
+				{
+					delete bind;
+					bind = nullptr;
+					break;
+				}
+
+				EventType type = (EventType)std::stoi( keyVal.substr( start, end - start ) );
+				int code = std::stoi( keyVal.substr( end + delimiter.length() ) );
+				EventInfo eventInfo;
+
+				eventInfo.code = code;
+
+				bind->BindEvent( type, eventInfo );
+			}
+
+			if ( !AddBinding( bind ) )
+			{
+				delete bind;
+			}
+			bind = nullptr;
+		}
+		bindings.close();
+	}
+	else
+	{
+		std::cerr << "Failed to load cfg file" << std::endl;
+	}
+
+
 }

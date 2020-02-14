@@ -72,7 +72,7 @@ public:
 		details(name)
 	{
 	}
-	void EventInfo( EventType type, EventInfo info )
+	void BindEvent( EventType type, EventInfo info = EventInfo() )
 	{
 		events.emplace_back( type, info );
 	}
@@ -100,7 +100,7 @@ public:
 	template<typename T>
 	bool AddCallback( const std::string& name, void(T::*func)(EventDetails*), T* instance )
 	{
-		auto temp = std::bind( func, instance, std::placeholders_1 );
+		auto temp = std::bind( func, instance, std::placeholders::_1 );
 		return callbacks.emplace( name, temp ).second;
 	}
 	void RemoveCallback(const std::string& name);
