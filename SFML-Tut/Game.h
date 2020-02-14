@@ -1,6 +1,7 @@
 #pragma once
 #include "SFMLWindow.h"
 #include "World.h"
+#include "Textbox.h"
 
 class Game
 {
@@ -24,4 +25,5 @@ private:
 	float constantFT = 0.0f;
 	World world;
 	Snake snake;
+	Textbox textbox;
 };

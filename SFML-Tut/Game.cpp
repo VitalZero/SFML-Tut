@@ -6,6 +6,8 @@ Game::Game()
 	snake( world.GetBlockSize() ),
 	world( sf::Vector2u(640, 480) )
 {
+	textbox.Setup( 5, 14, 350, sf::Vector2f( 255, 0 ) );
+	textbox.Add( "Seeded random number generator with " + std::to_string( time( nullptr ) ) );
 	clock.restart();
 	srand( time( nullptr ) );
 	elapsed = 0.0f;
@@ -59,6 +61,7 @@ void Game::Render()
 
 	world.Render( *window.GetRenderWindow() );
 	snake.Render( *window.GetRenderWindow() );
+	textbox.Render( *window.GetRenderWindow() );
 
 	window.EndDraw();
 }

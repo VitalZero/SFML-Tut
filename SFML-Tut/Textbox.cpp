@@ -19,13 +19,13 @@ Textbox::~Textbox()
 void Textbox::Setup( int visible, int charSize, int width, sf::Vector2f screenPos )
 {
 	numVisible = visible;
-	sf::Vector2f offset( 2.0f, 20.f );
+	sf::Vector2f offset( 2.0f, 2.0f );
 
 	font.loadFromFile( "fonts/arial.ttf" );
 	content.setFont( font );
 	content.setString( "" );
 	content.setCharacterSize( charSize );
-	content.setColor( sf::Color::White );
+	content.setFillColor( sf::Color::White );
 	content.setPosition( screenPos + offset);
 
 	backdrop.setSize( sf::Vector2f( width, (visible* charSize * 1.2f) ) );
@@ -33,7 +33,7 @@ void Textbox::Setup( int visible, int charSize, int width, sf::Vector2f screenPo
 	backdrop.setPosition( screenPos );
 }
 
-void Textbox::Add( std::string & message )
+void Textbox::Add( std::string message )
 {
 	messages.push_back( message );
 
