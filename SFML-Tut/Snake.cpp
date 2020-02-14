@@ -139,8 +139,8 @@ void Snake::Reset()
 	snakeBody.clear();
 
 	snakeBody.push_back( SnakeSegment( 5, 7 ) );
-	snakeBody.push_back( SnakeSegment( 5, 6 ) );
-	snakeBody.push_back( SnakeSegment( 5, 5 ) );
+	//snakeBody.push_back( SnakeSegment( 5, 6 ) );
+	//snakeBody.push_back( SnakeSegment( 5, 5 ) );
 
 	SetDirection( Direction::None );
 
