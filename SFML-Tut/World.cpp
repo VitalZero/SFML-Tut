@@ -48,12 +48,13 @@ void World::RespawnApple()
 	appleShape.setPosition( item.x * blockSize, item.y * blockSize );
 }
 
-void World::Update( Snake & player )
+void World::Update( Snake & player, Textbox& textbox )
 {
 	if ( player.GetPosition() == item )
 	{
 		player.Extend();
 		player.IncreaseScore();
+		textbox.Add( "Ate an apple, score: " + std::to_string( player.Getscore() ) );
 		RespawnApple();
 	}
 
@@ -63,9 +64,10 @@ void World::Update( Snake & player )
 	if ( player.GetPosition().x <= 0 ||
 		player.GetPosition().y <= 0 ||
 		player.GetPosition().x >= gridSizeX - 1 ||
-		player.GetPosition().y >= gridSizeY - 1)
+		player.GetPosition().y >= gridSizeY - 1 )
 	{
 		player.Lose();
+		textbox.Add( "GAME OVER!, score: " + std::to_string( player.Getscore() ) );
 	}
 }
 

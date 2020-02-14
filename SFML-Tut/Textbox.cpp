@@ -39,8 +39,7 @@ void Textbox::Add( std::string message )
 
 	if ( messages.size() >= 6 )
 	{
-		std::swap( *messages.begin(), *(messages.end() - 1) );
-		messages.pop_back();
+		messages.erase( messages.begin() );
 	}
 }
 

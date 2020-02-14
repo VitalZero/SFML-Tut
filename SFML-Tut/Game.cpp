@@ -46,7 +46,7 @@ void Game::Update()
 	if ( elapsed >= timeStep )
 	{
 		snake.Tick();
-		world.Update( snake );
+		world.Update( snake, textbox );
 		elapsed -= timeStep;
 		if ( snake.HasLost() )
 		{
