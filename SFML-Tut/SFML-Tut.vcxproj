@@ -136,6 +136,7 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="SFMLWindow.h" />
     <ClInclude Include="Snake.h" />
+    <ClInclude Include="BaseState.h" />
     <ClInclude Include="Textbox.h" />
     <ClInclude Include="World.h" />
   </ItemGroup>

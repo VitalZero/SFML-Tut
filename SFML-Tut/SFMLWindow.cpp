@@ -57,15 +57,6 @@ void Window::Update()
 			eventManager.SetFocus( true );
 		}
 		eventManager.HandleEvent( event );
-		//if ( event.type == sf::Event::Closed )
-		//{
-		//	isDone = true;
-		//}
-		//else if ( event.type == sf::Event::KeyPressed &&
-		//	event.key.code == sf::Keyboard::F5 )
-		//{
-		//	ToggleFullScreen();
-		//}
 	}
 	eventManager.Update();
 }
