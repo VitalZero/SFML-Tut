@@ -4,10 +4,10 @@ StateManager::StateManager( SharedContext * shared )
 	:
 	shared(shared)
 {
-	RegisterState<State_Intro>( StateType::Intro );
-	RegisterState<State_MainMenu>( StateType::MainMenu );
-	RegisterState<State_Game>( StateType::Game );
-	RegisterState<State_Paused>( StateType::Paused );
+	//RegisterState<State_Intro>( StateType::Intro );
+	//RegisterState<State_MainMenu>( StateType::MainMenu );
+	//RegisterState<State_Game>( StateType::Game );
+	//RegisterState<State_Paused>( StateType::Paused );
 }
 
 StateManager::~StateManager()
@@ -81,6 +81,15 @@ void StateManager::Draw()
 	}
 }
 
+void StateManager::ProcessRequests()
+{
+	while ( toRemove.begin() != toRemove.end() )
+	{
+		RemoveState( *toRemove.begin() );
+		toRemove.erase( toRemove.begin() );
+	}
+}
+
 SharedContext * StateManager::GetContext() const
 {
 	return shared;
@@ -104,7 +113,57 @@ bool StateManager::HasState( const StateType & type ) const
 	return false;
 }
 
+void StateManager::SwitchTo( const StateType & type )
+{
+	shared->eventManager->SetCurrentState( type );
+	for ( auto itrStates = states.begin(); itrStates != states.end(); ++itrStates )
+	{
+		if ( itrStates->first == type )
+		{
+			states.back().second->Deactivate();
+			StateType tmpType = itrStates->first;
+
+			BaseState* tmpState = itrStates->second;
+			states.erase( itrStates );
+			states.emplace_back( tmpType, tmpState );
+			tmpState->Activate();
+			break;
+		}
+	}
+	if ( !states.empty() )
+	{
+		states.back().second->Deactivate();
+	}
+	CreateState( type );
+	states.back().second->Activate();
+}
+
 void StateManager::Remove( const StateType & type )
 {
 	toRemove.push_back( type );
+}
+
+void StateManager::CreateState( const StateType & type )
+{
+	auto newState = stateFactory.find( type );
+	if ( newState != stateFactory.end() )
+	{
+		BaseState* tmpState = newState->second();
+		states.emplace_back( type, tmpState );
+		tmpState->OnCreate();
+	}
+}
+
+void StateManager::RemoveState( const StateType & type )
+{
+	for ( auto itrState = states.begin(); itrState != states.end(); ++itrState )
+	{
+		if ( itrState->first == type )
+		{
+			itrState->second->OnDestroy();
+			delete itrState->second;
+			states.erase( itrState );
+			break;
+		}
+	}
 }

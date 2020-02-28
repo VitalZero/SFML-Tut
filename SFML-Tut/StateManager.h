@@ -53,8 +53,9 @@ private:
 	template<class T>
 	void RegisterState( const StateType& type ) 
 	{
-		stateFactory[type] = [this]()->BaseState* {
-			return new (T)this;
+		stateFactory[type] = [this]()->BaseState* 
+		{
+			return new T(this);
 		};
 	};
 
