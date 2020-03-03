@@ -2,6 +2,7 @@
 #include "BaseState.h"
 #include "SFMLWindow.h"
 #include "EventManager.h"
+#include "SharedContext.h"
 #include <vector>
 #include <unordered_map>
 
@@ -13,17 +14,6 @@ enum class StateType
 	Paused,
 	GameOver,
 	Credits
-};
-
-struct SharedContext
-{
-	SharedContext()
-		:
-		window( nullptr ),
-		eventManager( nullptr )
-	{}
-	Window* window;
-	EventManager* eventManager;
 };
 
 using StateContainer = std::vector<std::pair<StateType, BaseState*>>;

@@ -140,6 +140,7 @@
     <ClInclude Include="EventManager.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="SFMLWindow.h" />
+    <ClInclude Include="SharedContext.h" />
     <ClInclude Include="Snake.h" />
     <ClInclude Include="BaseState.h" />
     <ClInclude Include="StateManager.h" />
