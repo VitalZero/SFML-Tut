@@ -30,7 +30,7 @@ using StateContainer = std::vector<std::pair<StateType, BaseState*>>;
 
 using TypeContainer = std::vector<StateType>;
 
-using StateFactory = std::unordered_map<StateType, std::function<BaseState*>>;
+using StateFactory = std::unordered_map<StateType, std::function<BaseState*(void)>>;
 
 class StateManager
 {
