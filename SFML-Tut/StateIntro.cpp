@@ -1,5 +1,4 @@
 #include "StateIntro.h"
-#include "StateManager.h"
 
 StateIntro::StateIntro( StateManager * stateManager )
 	:

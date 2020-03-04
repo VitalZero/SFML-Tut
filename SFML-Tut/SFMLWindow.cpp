@@ -13,7 +13,7 @@ void Window::Setup( const std::string & title, const sf::Vector2u & size )
 {
 	hasFocus = true;
 
-	eventManager.AddCallback( StateType(0), "Fullscreen_toggle", &Window::ToggleFullScreen, this );
+	eventManager.AddCallback( StateType( 0 ), "Fullscreen_toggle", &Window::ToggleFullScreen, this );
 	eventManager.AddCallback( StateType( 0 ), "Window_close", &Window::Close, this );
 
 	windowTitle = title;

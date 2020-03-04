@@ -4,11 +4,12 @@
 #include "EventManager.h"
 #include "StateManager.h"
 
-class StateIntro : public BaseState
+class MainMenu : public BaseState 
 {
 public:
-	StateIntro( StateManager* stateManager );
-	~StateIntro() {}
+	MainMenu( StateManager* stateManager );
+	~MainMenu() {};
+
 public:
 	void OnCreate() override;
 	void OnDestroy() override;
@@ -16,12 +17,14 @@ public:
 	void Deactivate() override {};
 	void Update( const sf::Time& time ) override;
 	void Draw() override;
-	void Continue( EventDetails* details );
+	void MouseClick( EventDetails* eventDetails );
 
 private:
-	sf::Texture introTexture;
-	sf::Sprite introSprite;
 	sf::Text text;
 	sf::Font font;
-	float timePassed;
+	sf::Vector2f buttonSize;
+	sf::Vector2f buttonPos;
+	unsigned int buttonPadding;
+	sf::RectangleShape rects[3];
+	sf::Text labels[3];
 };
