@@ -2,6 +2,7 @@
 #include "BaseState.h"
 #include "SFMLWindow.h"
 #include "EventManager.h"
+#include "SharedContext.h"
 #include <vector>
 #include <unordered_map>
 
@@ -15,21 +16,8 @@ enum class StateType
 	Credits
 };
 
-struct SharedContext
-{
-	SharedContext()
-		:
-		window( nullptr ),
-		eventManager( nullptr )
-	{}
-	Window* window;
-	EventManager* eventManager;
-};
-
 using StateContainer = std::vector<std::pair<StateType, BaseState*>>;
-
 using TypeContainer = std::vector<StateType>;
-
 using StateFactory = std::unordered_map<StateType, std::function<BaseState*(void)>>;
 
 class StateManager

@@ -84,7 +84,9 @@ public:
 };
 
 using Bindings = std::unordered_map<std::string, Binding*>;
-using Callbacks = std::unordered_map<std::string, std::function<void( EventDetails* )>>;
+using CallbackContainer = std::unordered_map< std::string, std::function<void( EventDetails* )>>;
+enum class StateType;
+using Callbacks = std::unordered_map<StateType, CallbackContainer>;
 
 
 class EventManager
@@ -98,12 +100,13 @@ public:
 	bool RemoveBinding( const std::string& name );
 	void SetFocus( const bool focus );
 	template<typename T>
-	bool AddCallback( const std::string& name, void(T::*func)(EventDetails*), T* instance )
+	bool AddCallback( StateType state, const std::string& name, void(T::*func)(EventDetails*), T* instance )
 	{
+		auto itrCallb = callbacks.emplace( state, CallbackContainer() ).first;
 		auto temp = std::bind( func, instance, std::placeholders::_1 );
-		return callbacks.emplace( name, temp ).second;
+		return itrCallb->second.emplace( name, temp ).second;
 	}
-	void RemoveCallback(const std::string& name);
+	bool RemoveCallback( StateType state, const std::string& name);
 	void HandleEvent( sf::Event& event );
 	void Update();
 	sf::Vector2i GetMousePos( sf::RenderWindow* window = nullptr );
@@ -115,5 +118,5 @@ private:
 	Bindings bindings;
 	Callbacks callbacks;
 	bool hasFocus;
-
+	StateType currentState;
 };

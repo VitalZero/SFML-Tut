@@ -48,9 +48,22 @@ void EventManager::SetFocus( const bool focus )
 	hasFocus = focus;
 }
 
-void EventManager::RemoveCallback( const std::string & name )
+bool EventManager::RemoveCallback( StateType state, const std::string & name )
 {
-	callbacks.erase( name );
+	auto itrCallb = callbacks.find( state );
+	if ( itrCallb == callbacks.end() )
+	{
+		return false;
+	}
+	auto itrCallb2 = itrCallb->second.find( name );
+	if ( itrCallb2 == itrCallb->second.end() )
+	{
+		return false;
+	}
+
+	itrCallb->second.erase( name );
+
+	return true;
 }
 
 void EventManager::HandleEvent( sf::Event & event )
@@ -156,10 +169,25 @@ void EventManager::Update()
 
 			if ( bind->events.size() == bind->c )
 			{
-				auto callItr = callbacks.find( bind->name );
-				if ( callItr != callbacks.end() )
+				auto stateCallbacks = callbacks.find( currentState );
+				auto otherCallbacks = callbacks.find( StateType( 0 ) );
+
+				if ( stateCallbacks != callbacks.end() )
 				{
-					callItr->second( &bind->details );
+					auto callItr = stateCallbacks->second.find( bind->name );
+					if ( callItr != stateCallbacks->second.end() )
+					{
+						callItr->second( &bind->details );
+					}
+				}
+
+				if ( otherCallbacks != callbacks.end() )
+				{
+					auto callItr = otherCallbacks->second.find( bind->name );
+					if ( callItr != otherCallbacks->second.end() )
+					{
+						callItr->second( &bind->details );
+					}
 				}
 			}
 			bind->c = 0;
