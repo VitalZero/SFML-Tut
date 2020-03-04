@@ -67,6 +67,11 @@ bool Window::IsFullScreen() const { return isFullScreen; }
 
 sf::Vector2u Window::GetWindowSize() const { return windowSize; }
 
+bool Window::IsFocused() const
+{
+	return hasFocus;
+}
+
 EventManager * Window::GetEventManager()
 {
 	return &eventManager;
