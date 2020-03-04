@@ -13,7 +13,7 @@ int main()
 		game.HandleInput();
 		game.Update();
 		game.Render();
-		game.RestartClock();
+		game.LateUpdate();
 		//float currentTime = game.GetElapsed().asSeconds(); // fps
 		//float fps = 1.0f / currentTime; // fps
 		//lastTime = currentTime; // fps

@@ -17,7 +17,7 @@ public:
 	bool IsFullScreen() const;
 	sf::Vector2u GetWindowSize() const;
 	bool IsFocused() const;
-	EventManager* GetEventManager() const;
+	EventManager* GetEventManager();
 	void ToggleFullScreen( EventDetails* details );
 	void Close( EventDetails* details = nullptr );
 	void Draw( sf::Drawable& drawable );

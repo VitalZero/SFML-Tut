@@ -21,7 +21,7 @@ public:
 	virtual void OnDestroy() = 0;
 	virtual void Activate() = 0;
 	virtual void Deactivate() = 0;
-	virtual void Update(const sf::Time& tme) = 0;
+	virtual void Update(const sf::Time& time) = 0;
 	virtual void Draw() = 0;
 
 public:
@@ -37,7 +37,7 @@ public:
 	bool IsTrascendent() const { return trascendent; }
 	StateManager* GetStateManager() const { return stateManager; }
 
-private:
+protected:
 	StateManager* stateManager;
 	bool transparent;
 	bool trascendent;

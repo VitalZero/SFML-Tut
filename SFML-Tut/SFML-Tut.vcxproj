@@ -132,6 +132,7 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="SFMLWindow.cpp" />
     <ClCompile Include="Snake.cpp" />
+    <ClCompile Include="StateIntro.cpp" />
     <ClCompile Include="StateManager.cpp" />
     <ClCompile Include="Textbox.cpp" />
     <ClCompile Include="World.cpp" />
@@ -143,6 +144,7 @@
     <ClInclude Include="SharedContext.h" />
     <ClInclude Include="Snake.h" />
     <ClInclude Include="BaseState.h" />
+    <ClInclude Include="StateIntro.h" />
     <ClInclude Include="StateManager.h" />
     <ClInclude Include="Textbox.h" />
     <ClInclude Include="World.h" />

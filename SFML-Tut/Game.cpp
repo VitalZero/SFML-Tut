@@ -4,13 +4,18 @@ Game::Game()
 	:
 	window( "Snake!", { 640, 480 } ),
 	snake( world.GetBlockSize() ),
-	world( sf::Vector2u(640, 480) )
+	world( sf::Vector2u(640, 480) ),
+	stateManager(&context)
 {
+	context.window = &window;
+	context.eventManager = window.GetEventManager();
+	stateManager.SwitchTo( StateType::Intro );
+
 	textbox.Setup( 5, 14, 350, sf::Vector2f( 255, 0 ) );
 	textbox.Add( "Seeded random number generator with " + std::to_string( time( nullptr ) ) );
 	clock.restart();
 	srand( time( nullptr ) );
-	elapsed = 0.0f;
+	elapsed = sf::Time::Zero;
 }
 
 void Game::HandleInput()
@@ -40,29 +45,34 @@ void Game::HandleInput()
 void Game::Update()
 {
 	window.Update();
+	
 
 	float timeStep = 1.0f / snake.GetSpeed();
+	float tmpElapsed = elapsed.asSeconds();
 
-	if ( elapsed >= timeStep )
+	if ( tmpElapsed >= timeStep )
 	{
 		snake.Tick();
 		world.Update( snake, textbox );
-		elapsed -= timeStep;
+		tmpElapsed -= timeStep;
 		if ( snake.HasLost() )
 		{
 			snake.Reset();
 		}
 	}
+
+	stateManager.Update( elapsed );
 }
 
 void Game::Render()
 {
 	window.BeginDraw();
+	
 
 	world.Render( *window.GetRenderWindow() );
 	snake.Render( *window.GetRenderWindow() );
 	textbox.Render( *window.GetRenderWindow() );
-
+	stateManager.Draw();
 	window.EndDraw();
 }
 
@@ -78,5 +88,11 @@ sf::Time Game::GetElapsed()
 
 void Game::RestartClock()
 {
-	elapsed += clock.restart().asSeconds();
+	elapsed += clock.restart();
+}
+
+void Game::LateUpdate()
+{
+	stateManager.ProcessRequests();
+	RestartClock();
 }

@@ -1,10 +1,11 @@
 #include "StateManager.h"
+#include "StateIntro.h"
 
 StateManager::StateManager( SharedContext * shared )
 	:
 	shared(shared)
 {
-	//RegisterState<State_Intro>( StateType::Intro );
+	RegisterState<StateIntro>( StateType::Intro );
 	//RegisterState<State_MainMenu>( StateType::MainMenu );
 	//RegisterState<State_Game>( StateType::Game );
 	//RegisterState<State_Paused>( StateType::Paused );
@@ -115,7 +116,7 @@ bool StateManager::HasState( const StateType & type ) const
 
 void StateManager::SwitchTo( const StateType & type )
 {
-	shared->eventManager->SetCurrentState( type );
+	//shared->eventManager->SetCurrentState( type );
 	for ( auto itrStates = states.begin(); itrStates != states.end(); ++itrStates )
 	{
 		if ( itrStates->first == type )
