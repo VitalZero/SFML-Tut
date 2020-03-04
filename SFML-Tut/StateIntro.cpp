@@ -27,7 +27,7 @@ void StateIntro::OnCreate()
 	sf::FloatRect textRect = text.getLocalBounds();
 
 	text.setOrigin( textRect.left + textRect.width / 2.0f, textRect.top + textRect.height / 2.0f );
-	text.setPosition( windowSize.x / 2.0f, windowSize.y / 2.0f );
+	text.setPosition( windowSize.x / 2.0f, (windowSize.y / 2.0f) + 80.0f );
 
 	EventManager* evMgr = stateManager->GetContext()->eventManager;
 	evMgr->AddCallback( StateType::Intro, "Intro_Continue", &StateIntro::Continue, this );
@@ -41,18 +41,22 @@ void StateIntro::OnDestroy()
 
 void StateIntro::Update( const sf::Time & time )
 {
-	if ( timePassed >= 5.0f )
+	if ( timePassed < 5.0f )
 	{
 		timePassed += time.asSeconds();
 		introSprite.setPosition( introSprite.getPosition().x, 
-			introSprite.getPosition().y + ( 48 - time.asSeconds() ) );
+			introSprite.getPosition().y + ( 48 * time.asSeconds() ) );
 	}
 }
 
 void StateIntro::Draw()
 {
 	sf::RenderWindow* window = stateManager->GetContext()->window->GetRenderWindow();
-	window->draw( text );
+	window->draw( introSprite );
+	if ( timePassed >= 5.0f )
+	{
+		window->draw( text );
+	}
 }
 
 void StateIntro::Continue( EventDetails * details )
