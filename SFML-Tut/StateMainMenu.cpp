@@ -51,3 +51,14 @@ void MainMenu::OnCreate()
 	EventManager* evMgr = stateManager->GetContext()->eventManager;
 	evMgr->AddCallback( StateType::MainMenu, "Mouse_Left", &MainMenu::MouseClick, this );
 }
+
+void MainMenu::OnDestroy()
+{
+	EventManager* evMgr = stateManager->GetContext()->eventManager;
+	evMgr->RemoveCallback( StateType::MainMenu, "Mouse_Left" );
+}
+
+void MainMenu::Activate()
+{
+
+}
