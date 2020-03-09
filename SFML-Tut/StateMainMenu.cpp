@@ -60,5 +60,53 @@ void MainMenu::OnDestroy()
 
 void MainMenu::Activate()
 {
+	if ( stateManager->HasState( StateType::Game ) && labels[0].getString() == "PLAY" )
+	{
+		labels[0].setString( sf::String( "RESUME" ) );
+		sf::FloatRect rect = labels[0].getLocalBounds();
+		labels[0].setOrigin( rect.left + rect.width / 2.0f, rect.top + rect.height / 2.0f );
+	}
+}
 
+void MainMenu::Draw()
+{
+	sf::RenderWindow* window = stateManager->GetContext()->window->GetRenderWindow();
+	
+	window->draw( text );
+
+	for ( int i = 0; i < 3; ++i )
+	{
+		window->draw( rects[i] );
+		window->draw( labels[i] );
+	}
+}
+
+void MainMenu::MouseClick( EventDetails * eventDetails )
+{
+	sf::Vector2i mousePos = eventDetails->mouse;
+
+	float halfX = buttonSize.x / 2.0f;
+	float halfY = buttonSize.y / 2.0f;
+	
+	for( int i = 0; i < 3; ++i )
+	{
+		if ( mousePos.x >= rects[i].getPosition().x - halfX &&
+			mousePos.x <= rects[i].getPosition().x + halfX &&
+			mousePos.y >= rects[i].getPosition().y - halfY &&
+			mousePos.y <= rects[i].getPosition().y + halfY )
+		{
+			if ( i == 0 )
+			{
+				stateManager->SwitchTo( StateType::Game );
+			}
+			else if ( i == 1 )
+			{
+
+			}
+			else if ( i == 2 )
+			{
+				stateManager->GetContext()->window->Close();
+			}
+		}
+	}
 }

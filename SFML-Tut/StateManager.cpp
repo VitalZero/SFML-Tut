@@ -1,12 +1,13 @@
 #include "StateManager.h"
 #include "StateIntro.h"
+#include "StateMainMenu.h"
 
 StateManager::StateManager( SharedContext * shared )
 	:
 	shared(shared)
 {
 	RegisterState<StateIntro>( StateType::Intro );
-	//RegisterState<State_MainMenu>( StateType::MainMenu );
+	RegisterState<MainMenu>( StateType::MainMenu );
 	//RegisterState<State_Game>( StateType::Game );
 	//RegisterState<State_Paused>( StateType::Paused );
 }
