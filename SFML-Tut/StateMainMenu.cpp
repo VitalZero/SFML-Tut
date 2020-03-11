@@ -2,7 +2,7 @@
 
 StateMainMenu::StateMainMenu( StateManager * stateManager )
 	:
-	BaseState(stateManager)
+	BaseState( stateManager )
 {
 }
 
