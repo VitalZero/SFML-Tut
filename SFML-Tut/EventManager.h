@@ -110,6 +110,10 @@ public:
 	void HandleEvent( sf::Event& event );
 	void Update();
 	sf::Vector2i GetMousePos( sf::RenderWindow* window = nullptr );
+	void SetCurrentState( StateType state )
+	{
+		currentState = state;
+	}
 
 private:
 	void LoadBindings();

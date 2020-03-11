@@ -115,12 +115,12 @@ bool StateManager::HasState( const StateType & type ) const
 	return false;
 }
 
-void StateManager::SwitchTo( const StateType & type )
+void StateManager::SwitchTo( const StateType & state )
 {
-	//shared->eventManager->SetCurrentState( type );
+	shared->eventManager->SetCurrentState( state );
 	for ( auto itrStates = states.begin(); itrStates != states.end(); ++itrStates )
 	{
-		if ( itrStates->first == type )
+		if ( itrStates->first == state )
 		{
 			states.back().second->Deactivate();
 			StateType tmpType = itrStates->first;
@@ -136,7 +136,7 @@ void StateManager::SwitchTo( const StateType & type )
 	{
 		states.back().second->Deactivate();
 	}
-	CreateState( type );
+	CreateState( state );
 	states.back().second->Activate();
 }
 

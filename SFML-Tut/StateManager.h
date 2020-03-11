@@ -32,7 +32,7 @@ public:
 	void ProcessRequests();
 	SharedContext* GetContext() const;
 	bool HasState( const StateType& type ) const;
-	void SwitchTo( const StateType& type );
+	void SwitchTo( const StateType& state );
 	void Remove( const StateType& type );
 
 private:
