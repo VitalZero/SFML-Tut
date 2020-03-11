@@ -1,12 +1,12 @@
 #include "StateMainMenu.h"
 
-MainMenu::MainMenu( StateManager * stateManager )
+StateMainMenu::StateMainMenu( StateManager * stateManager )
 	:
 	BaseState(stateManager)
 {
 }
 
-void MainMenu::OnCreate()
+void StateMainMenu::OnCreate()
 {
 	font.loadFromFile( "fonts/arial.ttf" );
 	text.setFont( font );
@@ -15,7 +15,7 @@ void MainMenu::OnCreate()
 
 	sf::FloatRect textRect = text.getLocalBounds();
 	text.setOrigin( textRect.left + textRect.width / 2.0f, textRect.top + textRect.height / 2.0f );
-	text.setPosition( 200, 100 );
+	text.setPosition( 400, 100 );
 
 	buttonSize.x = 300.0f;
 	buttonSize.y = 32.0f;
@@ -49,16 +49,16 @@ void MainMenu::OnCreate()
 	}
 
 	EventManager* evMgr = stateManager->GetContext()->eventManager;
-	evMgr->AddCallback( StateType::MainMenu, "Mouse_Left", &MainMenu::MouseClick, this );
+	evMgr->AddCallback( StateType::MainMenu, "Mouse_Left", &StateMainMenu::MouseClick, this );
 }
 
-void MainMenu::OnDestroy()
+void StateMainMenu::OnDestroy()
 {
 	EventManager* evMgr = stateManager->GetContext()->eventManager;
 	evMgr->RemoveCallback( StateType::MainMenu, "Mouse_Left" );
 }
 
-void MainMenu::Activate()
+void StateMainMenu::Activate()
 {
 	if ( stateManager->HasState( StateType::Game ) && labels[0].getString() == "PLAY" )
 	{
@@ -68,7 +68,7 @@ void MainMenu::Activate()
 	}
 }
 
-void MainMenu::Draw()
+void StateMainMenu::Draw()
 {
 	sf::RenderWindow* window = stateManager->GetContext()->window->GetRenderWindow();
 	
@@ -81,7 +81,7 @@ void MainMenu::Draw()
 	}
 }
 
-void MainMenu::MouseClick( EventDetails * eventDetails )
+void StateMainMenu::MouseClick( EventDetails * eventDetails )
 {
 	sf::Vector2i mousePos = eventDetails->mouse;
 

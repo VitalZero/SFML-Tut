@@ -7,7 +7,7 @@ StateManager::StateManager( SharedContext * shared )
 	shared(shared)
 {
 	RegisterState<StateIntro>( StateType::Intro );
-	RegisterState<MainMenu>( StateType::MainMenu );
+	RegisterState<StateMainMenu>( StateType::MainMenu );
 	//RegisterState<State_Game>( StateType::Game );
 	//RegisterState<State_Paused>( StateType::Paused );
 }

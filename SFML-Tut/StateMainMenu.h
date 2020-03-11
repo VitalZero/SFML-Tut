@@ -4,11 +4,11 @@
 #include "EventManager.h"
 #include "StateManager.h"
 
-class MainMenu : public BaseState 
+class StateMainMenu : public BaseState 
 {
 public:
-	MainMenu( StateManager* stateManager );
-	~MainMenu() {};
+	StateMainMenu( StateManager* stateManager );
+	~StateMainMenu() {};
 
 public:
 	void OnCreate() override;
