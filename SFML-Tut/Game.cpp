@@ -46,7 +46,7 @@ void Game::Update()
 {
 	window.Update();
 	
-
+/*
 	float timeStep = 1.0f / snake.GetSpeed();
 	float tmpElapsed = elapsed.asSeconds();
 
@@ -60,7 +60,7 @@ void Game::Update()
 			snake.Reset();
 		}
 	}
-
+	*/
 	stateManager.Update( elapsed );
 }
 
@@ -69,9 +69,9 @@ void Game::Render()
 	window.BeginDraw();
 	
 
-	world.Render( *window.GetRenderWindow() );
+	/*world.Render( *window.GetRenderWindow() );
 	snake.Render( *window.GetRenderWindow() );
-	textbox.Render( *window.GetRenderWindow() );
+	textbox.Render( *window.GetRenderWindow() );*/
 	stateManager.Draw();
 	window.EndDraw();
 }

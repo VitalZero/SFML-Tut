@@ -13,9 +13,9 @@ public:
 public:
 	void OnCreate() override;
 	void OnDestroy() override;
-	void Activate() override;
+	void Activate() override {};
 	void Deactivate() override {};
-	void Update( const sf::Time& time ) override {};
+	void Update( const sf::Time& time ) override;
 	void Draw() override;
 	void MainMenu( EventDetails* details );
 	void Pause( EventDetails* details );

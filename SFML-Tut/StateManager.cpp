@@ -1,6 +1,7 @@
 #include "StateManager.h"
 #include "StateIntro.h"
 #include "StateMainMenu.h"
+#include "StateGame.h"
 
 StateManager::StateManager( SharedContext * shared )
 	:
@@ -8,7 +9,7 @@ StateManager::StateManager( SharedContext * shared )
 {
 	RegisterState<StateIntro>( StateType::Intro );
 	RegisterState<StateMainMenu>( StateType::MainMenu );
-	//RegisterState<State_Game>( StateType::Game );
+	RegisterState<StateGame>( StateType::Game );
 	//RegisterState<State_Paused>( StateType::Paused );
 }
 
