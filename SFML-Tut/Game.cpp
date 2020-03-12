@@ -88,7 +88,7 @@ sf::Time Game::GetElapsed()
 
 void Game::RestartClock()
 {
-	elapsed += clock.restart();
+	elapsed = clock.restart();
 }
 
 void Game::LateUpdate()
