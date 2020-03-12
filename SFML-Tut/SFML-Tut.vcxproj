@@ -136,6 +136,7 @@
     <ClCompile Include="StateIntro.cpp" />
     <ClCompile Include="StateMainMenu.cpp" />
     <ClCompile Include="StateManager.cpp" />
+    <ClCompile Include="StatePaused.cpp" />
     <ClCompile Include="Textbox.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
@@ -150,6 +151,7 @@
     <ClInclude Include="StateIntro.h" />
     <ClInclude Include="StateMainMenu.h" />
     <ClInclude Include="StateManager.h" />
+    <ClInclude Include="StatePaused.h" />
     <ClInclude Include="Textbox.h" />
     <ClInclude Include="World.h" />
   </ItemGroup>
