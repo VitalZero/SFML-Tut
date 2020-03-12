@@ -12,13 +12,13 @@ void StateIntro::OnCreate()
 
 	sf::Vector2u windowSize = stateManager->GetContext()->window->GetRenderWindow()->getSize();
 
-	introTexture.loadFromFile( "img/intro.png" );
+	introTexture.loadFromFile( "img\\intro.png" );
 	introSprite.setTexture( introTexture );
 
 	introSprite.setOrigin( introTexture.getSize().x / 2.0f, introTexture.getSize().y / 2.0f );
 	introSprite.setPosition( windowSize.x / 2.0f, 0 );
 
-	font.loadFromFile( "fonts/arial.ttf" );
+	font.loadFromFile( "fonts\\arial.ttf" );
 	text.setFont( font );
 	text.setString( { "Press SPACE to continue" } );
 	text.setCharacterSize( 15 );

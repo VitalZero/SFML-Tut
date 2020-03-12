@@ -9,7 +9,7 @@ StatePaused::StatePaused( StateManager * stateManager )
 void StatePaused::OnCreate()
 {
 	SetTransparent( true );
-	font.loadFromFile( "fonts/arial.ttf" );
+	font.loadFromFile( "fonts\\arial.ttf" );
 	text.setFont( font );
 	text.setString( sf::String( "PAUSED" ) );
 	text.setCharacterSize( 14 );

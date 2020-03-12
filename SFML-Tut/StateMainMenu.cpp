@@ -8,7 +8,7 @@ StateMainMenu::StateMainMenu( StateManager * stateManager )
 
 void StateMainMenu::OnCreate()
 {
-	font.loadFromFile( "fonts/arial.ttf" );
+	font.loadFromFile( "fonts\\arial.ttf" );
 	text.setFont( font );
 	text.setString( { "MAIN MENU:" } );
 	text.setCharacterSize( 18 );

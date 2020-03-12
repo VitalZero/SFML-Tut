@@ -153,6 +153,7 @@
     <ClInclude Include="StateManager.h" />
     <ClInclude Include="StatePaused.h" />
     <ClInclude Include="Textbox.h" />
+    <ClInclude Include="Utilities.h" />
     <ClInclude Include="World.h" />
   </ItemGroup>
   <ItemGroup>

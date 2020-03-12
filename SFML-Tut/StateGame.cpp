@@ -8,7 +8,7 @@ StateGame::StateGame( StateManager * stateManager )
 
 void StateGame::OnCreate()
 {
-	texture.loadFromFile( "img/Mushroom.png" );
+	texture.loadFromFile( "img\\Mushroom.png" );
 	sprite.setTexture( texture );
 	sprite.setOrigin( texture.getSize().x / 2.0f, texture.getSize().y / 2.0f );
 	sprite.setPosition( 100, 100 );

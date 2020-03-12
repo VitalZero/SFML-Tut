@@ -36,9 +36,11 @@ public:
 	bool IsTransparent() const { return transparent; }
 	bool IsTrascendent() const { return trascendent; }
 	StateManager* GetStateManager() const { return stateManager; }
+	sf::View& GetView() { return view; }
 
 protected:
 	StateManager* stateManager;
 	bool transparent;
 	bool trascendent;
+	sf::View view;
 };

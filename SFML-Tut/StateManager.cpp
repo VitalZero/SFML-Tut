@@ -75,6 +75,7 @@ void StateManager::Draw()
 			}
 			for ( ; itrState != states.end(); ++itrState )
 			{
+				shared->window->GetRenderWindow()->setView( itrState->second->GetView() );
 				itrState->second->Draw();
 			}
 		}
@@ -117,12 +118,12 @@ bool StateManager::HasState( const StateType & type ) const
 	return false;
 }
 
-void StateManager::SwitchTo( const StateType & state )
+void StateManager::SwitchTo( const StateType & type )
 {
-	shared->eventManager->SetCurrentState( state );
+	shared->eventManager->SetCurrentState( type );
 	for ( auto itrStates = states.begin(); itrStates != states.end(); ++itrStates )
 	{
-		if ( itrStates->first == state )
+		if ( itrStates->first == type )
 		{
 			states.back().second->Deactivate();
 			StateType tmpType = itrStates->first;
@@ -131,6 +132,7 @@ void StateManager::SwitchTo( const StateType & state )
 			states.erase( itrStates );
 			states.emplace_back( tmpType, tmpState );
 			tmpState->Activate();
+			shared->window->GetRenderWindow()->setView( tmpState->GetView() );
 			break;
 		}
 	}
@@ -138,8 +140,9 @@ void StateManager::SwitchTo( const StateType & state )
 	{
 		states.back().second->Deactivate();
 	}
-	CreateState( state );
+	CreateState( type );
 	states.back().second->Activate();
+	shared->window->GetRenderWindow()->setView( states.back().second->GetView() );
 }
 
 void StateManager::Remove( const StateType & type )
@@ -153,6 +156,8 @@ void StateManager::CreateState( const StateType & type )
 	if ( newState != stateFactory.end() )
 	{
 		BaseState* tmpState = newState->second();
+		tmpState->view = shared->window->GetRenderWindow()->getDefaultView();
+
 		states.emplace_back( type, tmpState );
 		tmpState->OnCreate();
 	}
