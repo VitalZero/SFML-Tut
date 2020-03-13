@@ -98,3 +98,12 @@ sf::RenderWindow* Window::GetRenderWindow()
 {
 	return &window;
 }
+
+sf::FloatRect Window::GetViewSpace()
+{
+	sf::Vector2f viewCenter = window.getView().getCenter();
+	sf::Vector2f viewSize = window.getView().getSize();
+	sf::Vector2f viewSizeHalf( viewSize.x / 2.0f, viewSize.y / 2.0f );
+	sf::FloatRect viewSpace( viewCenter - viewSizeHalf, viewSize );
+	return viewSpace;
+}

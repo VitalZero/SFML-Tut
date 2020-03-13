@@ -22,6 +22,7 @@ public:
 	void Close( EventDetails* details = nullptr );
 	void Draw( sf::Drawable& drawable );
 	sf::RenderWindow* GetRenderWindow();
+	sf::FloatRect GetViewSpace();
 
 private:
 	void Setup( const std::string& title, const sf::Vector2u& size );
