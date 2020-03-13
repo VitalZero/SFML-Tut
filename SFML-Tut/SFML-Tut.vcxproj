@@ -143,6 +143,7 @@
   <ItemGroup>
     <ClInclude Include="EventManager.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="SFMLWindow.h" />
     <ClInclude Include="SharedContext.h" />
     <ClInclude Include="Snake.h" />
@@ -153,11 +154,13 @@
     <ClInclude Include="StateManager.h" />
     <ClInclude Include="StatePaused.h" />
     <ClInclude Include="Textbox.h" />
+    <ClInclude Include="TextureManager.h" />
     <ClInclude Include="Utilities.h" />
     <ClInclude Include="World.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="keys.cfg" />
+    <None Include="textures.cfg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

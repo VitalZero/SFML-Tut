@@ -95,9 +95,18 @@
     <ClInclude Include="Utilities.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
+    <ClInclude Include="ResourceManager.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureManager.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="keys.cfg">
+      <Filter>Archivos de recursos</Filter>
+    </None>
+    <None Include="textures.cfg">
       <Filter>Archivos de recursos</Filter>
     </None>
   </ItemGroup>
