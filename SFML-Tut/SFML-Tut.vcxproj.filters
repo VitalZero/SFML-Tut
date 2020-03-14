@@ -51,6 +51,9 @@
     <ClCompile Include="StatePaused.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="SpriteSheet.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -101,12 +104,21 @@
     <ClInclude Include="TextureManager.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
+    <ClInclude Include="SpriteSheet.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="Directions.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="keys.cfg">
       <Filter>Archivos de recursos</Filter>
     </None>
     <None Include="textures.cfg">
+      <Filter>Archivos de recursos</Filter>
+    </None>
+    <None Include="media\spritesheets\Player.sheet">
       <Filter>Archivos de recursos</Filter>
     </None>
   </ItemGroup>

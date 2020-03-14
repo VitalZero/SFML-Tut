@@ -132,6 +132,7 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="SFMLWindow.cpp" />
     <ClCompile Include="Snake.cpp" />
+    <ClCompile Include="SpriteSheet.cpp" />
     <ClCompile Include="StateGame.cpp" />
     <ClCompile Include="StateIntro.cpp" />
     <ClCompile Include="StateMainMenu.cpp" />
@@ -141,6 +142,8 @@
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Directions.h" />
+    <ClInclude Include="SpriteSheet.h" />
     <ClInclude Include="EventManager.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="ResourceManager.h" />
@@ -160,6 +163,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="keys.cfg" />
+    <None Include="media\spritesheets\Player.sheet" />
     <None Include="textures.cfg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
