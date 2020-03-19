@@ -51,3 +51,47 @@ void SpriteSheet::SetDirection( const Direction & dir )
 	}
 
 }
+
+AnimBase * SpriteSheet::GetCurrentAnim()
+{
+	return animationCurrent;
+}
+
+bool SpriteSheet::SetAnimation( const std::string & name, const bool & play, const bool & loop )
+{
+	auto itr = animations.find( name );
+	if ( itr == animations.end() )
+	{
+		return false;
+	}
+	if ( itr->second == animationCurrent )
+	{
+		return false;
+	}
+	if ( animationCurrent )
+	{
+		animationCurrent->Stop();
+	}
+
+	animationCurrent = itr->second;
+	animationCurrent->SetLooping( loop );
+
+	if ( play )
+	{
+		animationCurrent->Play();
+	}
+
+	animationCurrent->CropSprite();
+
+	return true;
+}
+
+void SpriteSheet::Update( const float & dt )
+{
+	animationCurrent->Update( dt );
+}
+
+void SpriteSheet::Draw( sf::RenderWindow* window )
+{
+	window->draw( sprite );
+}

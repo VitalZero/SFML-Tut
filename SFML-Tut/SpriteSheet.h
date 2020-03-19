@@ -1,6 +1,5 @@
 #pragma once
-#include "TextureManager.h"
-#include "Directions.h"
+#include "AnimBase.h"
 
 using Animations = std::unordered_map<std::string, AnimBase*>;
 
@@ -20,7 +19,7 @@ public:
 	AnimBase* GetCurrentAnim();
 	bool SetAnimation( const std::string& name, const bool& play = false, const bool& loop = false );
 	void Update( const float& dt );
-	void Draw( sf::RenderWindow& window );
+	void Draw( sf::RenderWindow* window );
 
 private:
 	std::string texture;
