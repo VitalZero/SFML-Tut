@@ -2,6 +2,7 @@
 #include <string>
 #include <unordered_map>
 #include <iostream>
+#include <fstream>
 #include <sstream>
 #include "Utilities.h"
 
@@ -11,7 +12,7 @@ class ResourceManager
 public:
 	ResourceManager( const std::string& pathsFile )
 	{
-		LoadPaths( pathsFile )
+		LoadPaths( pathsFile );
 	}
 	virtual ~ResourceManager()
 	{
@@ -69,7 +70,7 @@ public:
 	}
 	T* Load( const std::string& id )
 	{
-		return static_cast<Derived*>(this)->Load( path );
+		return static_cast<Derived*>(this)->Load( id );
 	}
 
 protected:
@@ -87,7 +88,7 @@ protected:
 				std::string pathName;
 				std::string path;
 
-				keystream >> pathName:
+				keystream >> pathName;
 				keystream >> path;
 
 				paths.emplace( pathName, path );
@@ -95,7 +96,7 @@ protected:
 		}
 		else
 		{
-			std::cerr << "No se pudo abrir archivo de rutas!." std::endl;
+			std::cerr << "No se pudo abrir archivo de rutas!." << std::endl;
 		}
 	}
 	void PurgeResources()

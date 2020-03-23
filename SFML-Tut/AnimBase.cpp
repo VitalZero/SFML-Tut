@@ -58,7 +58,7 @@ bool AnimBase::IsInAction()
 	{
 		return true;
 	}
-	return ( frameCurrent >= frameActionStart && frameCurrent >= frameActionEnd );
+	return ( frameCurrent >= (Frame)frameActionStart && frameCurrent >= (Frame)frameActionEnd );
 }
 
 void AnimBase::SetName( const std::string & newName )
