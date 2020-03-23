@@ -14,6 +14,8 @@ public:
 	bool LoadSheet( const std::string& file );
 	void ReleaseSheet();
 	void SetSpriteSize( const sf::Vector2i& sprSize );
+	sf::Vector2i GetSpriteSize();
+	Direction GetDirection();
 	void SetSpritePosition( const sf::Vector2f& pos );
 	void SetDirection( const Direction& dir );
 	AnimBase* GetCurrentAnim();

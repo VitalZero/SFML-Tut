@@ -37,6 +37,16 @@ void SpriteSheet::SetSpriteSize( const sf::Vector2i& sprSize )
 	sprite.setOrigin( spriteSize.x / 2.0f, spriteSize.y / 2.0f );
 }
 
+sf::Vector2i SpriteSheet::GetSpriteSize()
+{
+	return spriteSize;
+}
+
+Direction SpriteSheet::GetDirection()
+{
+	return direction;
+}
+
 void SpriteSheet::SetSpritePosition( const sf::Vector2f & pos )
 {
 	sprite.setPosition( pos );
