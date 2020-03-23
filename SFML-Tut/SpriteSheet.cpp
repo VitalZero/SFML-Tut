@@ -1,4 +1,6 @@
 #include "SpriteSheet.h"
+#include <fstream>
+#include <sstream>
 
 SpriteSheet::SpriteSheet( TextureManager * textMgr )
 	:
@@ -17,6 +19,56 @@ SpriteSheet::~SpriteSheet()
 void SpriteSheet::CropSprite( sf::IntRect & rect )
 {
 	sprite.setTextureRect( rect );
+}
+
+bool SpriteSheet::LoadSheet( const std::string & file )
+{
+	std::ifstream sheet;
+	sheet.open( Utils::GetWorkingDirectory() + file );
+
+	if ( sheet )
+	{
+		ReleaseSheet();
+		std::string line;
+
+		while ( std::getline( sheet, line ) )
+		{
+			if ( line[0] == '|' )
+			{
+				continue;
+			}
+			std::stringstream keystream( line );
+			std::string type;
+
+			keystream >> type;
+
+			if ( type == "Texture" )
+			{
+				if ( texture != "" )
+				{
+					std::cerr << "Duplicate texture entries in: " << file << std::endl;
+					continue;
+				}
+			}
+
+			std::string tmpTexture;
+			keystream >> tmpTexture;
+			
+			if ( !textureManager->RequireResources( tmpTexture ) )
+			{
+				std::cerr << "Could not setup the texture: " << tmpTexture << std::endl;
+				continue;
+			}
+			texture = tmpTexture;
+			sprite.setTexture( *textureManager->GetResources( texture ) );
+		}
+
+		return true;
+	}
+
+	std::cerr << "Failed loading sprite sheet: " << file << std::endl;
+
+	return false;
 }
 
 void SpriteSheet::ReleaseSheet()
