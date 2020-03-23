@@ -13,9 +13,19 @@ public:
 	virtual ~AnimBase() {}
 
 public:
-	void Play();
-	void Pause();
-	void Stop();
+	void Play()
+	{
+		playing = true;
+	}
+	void Pause()
+	{
+		playing = false;
+	}
+	void Stop()
+	{
+		playing = false;
+		Reset();
+	}
 	void Reset();
 	virtual void Update( const float& dt );
 	friend std::stringstream& operator << ( std::stringstream& stream, AnimBase& a )
@@ -23,6 +33,9 @@ public:
 		a.ReadIn( stream );
 		return stream;
 	}
+	void SetSpriteSheet( SpriteSheet* sheet );
+	void SetFrame( const unsigned int& frame );
+	bool IsInAction();
 
 protected:
 	virtual void FrameStep() = 0;
