@@ -1,6 +1,7 @@
 #include "SpriteSheet.h"
 #include <fstream>
 #include <sstream>
+#include "AnimDirectional.h"
 
 SpriteSheet::SpriteSheet( TextureManager * textMgr )
 	:
@@ -49,18 +50,69 @@ bool SpriteSheet::LoadSheet( const std::string & file )
 					std::cerr << "Duplicate texture entries in: " << file << std::endl;
 					continue;
 				}
-			}
+				std::string tmpTexture;
+				keystream >> tmpTexture;
 
-			std::string tmpTexture;
-			keystream >> tmpTexture;
-			
-			if ( !textureManager->RequireResources( tmpTexture ) )
-			{
-				std::cerr << "Could not setup the texture: " << tmpTexture << std::endl;
-				continue;
+				if ( !textureManager->RequireResources( tmpTexture ) )
+				{
+					std::cerr << "Could not setup the texture: " << tmpTexture << std::endl;
+					continue;
+				}
+
+				texture = tmpTexture;
+				sprite.setTexture( *textureManager->GetResources( texture ) );
 			}
-			texture = tmpTexture;
-			sprite.setTexture( *textureManager->GetResources( texture ) );
+			else if ( type == "Size" )
+			{
+				keystream >> spriteSize.x >> spriteSize.y;
+				SetSpriteSize( spriteSize );
+			}
+			else if ( type == "Scale" )
+			{
+				keystream >> spriteScale.x >> spriteScale.y;
+				sprite.setScale( spriteScale );
+			}
+			else if ( type == "AnimationType" )
+			{
+				keystream >> animType;
+			}
+			else if ( type == "Animation" )
+			{
+				std::string tmpName;
+				keystream >> tmpName;
+
+				if ( animations.find( tmpName ) != animations.end() )
+				{
+					std::cerr << "Duplicate animation! ( " << tmpName <<
+						" ) in: " << file << std::endl;
+					continue;
+				}
+
+				AnimBase* anim = nullptr;
+				if ( animType == "Directional" )
+				{
+					anim == new AnimDirectional();
+				}
+				else
+				{
+					std::cerr << "Unknown animation type: " << animType << std::endl;
+					continue;
+				}
+
+				keystream >> *anim;
+				anim->SetSpriteSheet( this );
+				anim->SetName( tmpName );
+				anim->Reset();
+				animations.emplace( tmpName, anim );
+
+				if ( animationCurrent )
+				{
+					continue;
+				}
+
+				animationCurrent = anim;
+				animationCurrent->Play();
+			}
 		}
 
 		return true;

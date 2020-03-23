@@ -60,3 +60,13 @@ bool AnimBase::IsInAction()
 	}
 	return ( frameCurrent >= frameActionStart && frameCurrent >= frameActionEnd );
 }
+
+void AnimBase::SetName( const std::string & newName )
+{
+	name = newName;
+}
+
+void AnimBase::SetLooping( bool newLoop )
+{
+	loop = newLoop;
+}
