@@ -21,5 +21,7 @@ namespace Utils
 
 			return std::string( path );
 		}
+
+		return std::string( "" );
 	}
 } // end namespace

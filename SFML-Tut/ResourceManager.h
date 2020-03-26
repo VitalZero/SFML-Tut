@@ -6,7 +6,7 @@
 #include <sstream>
 #include "Utilities.h"
 
-template<class Derived, class T>
+template<typename Derived, typename T>
 class ResourceManager
 {
 public:
@@ -49,7 +49,7 @@ public:
 		{
 			return false;
 		}
-		resources.emplace( id, std::make_pair( resource, id ) );
+		resources.emplace( id, std::make_pair( resource, 1 ) );
 
 		return true;
 	}
@@ -68,12 +68,26 @@ public:
 
 		return true;
 	}
+	void PurgeResources()
+	{
+		while ( resources.begin() != resources.end() )
+		{
+			delete resources.begin()->second.first;
+			resources.erase( resources.begin() );
+		}
+	}
+
+protected:
 	T* Load( const std::string& id )
 	{
 		return static_cast<Derived*>(this)->Load( id );
 	}
-
-protected:
+private:
+	std::pair<T*, unsigned int>* Find( const std::string& id )
+	{
+		auto itr = resources.find( id );
+		return (itr != resources.end() ? &itr->second : nullptr);
+	}
 	void LoadPaths( const std::string& pathFile )
 	{
 		std::ifstream pathsF;
@@ -99,19 +113,6 @@ protected:
 			std::cerr << "No se pudo abrir archivo de rutas!." << std::endl;
 		}
 	}
-	void PurgeResources()
-	{
-		while ( resources.being() != resources.end() )
-		{
-			delete resources.begin()->second.first;
-			resources.erase( resources.begin() );
-		}
-	}
-	std::pair<T*, unsigned int>* Find( const std::string& id )
-	{
-		auto itr = resources.find( id );
-		return (itr != resources.end() ? &itr->second : nullptr);
-	}
 	bool Unload( const std::string& id )
 	{
 		auto itr = resources.find( id );
@@ -124,6 +125,7 @@ protected:
 
 		return true;
 	}
+
 private:
 	std::unordered_map<std::string, std::pair<T*, unsigned int>> resources;
 	std::unordered_map<std::string, std::string> paths;
