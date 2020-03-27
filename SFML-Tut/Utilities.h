@@ -1,14 +1,17 @@
 #pragma once
+#pragma comment(lib, "Shlwapi")
+
 #include <iostream>
 #include <string>
 #include <algorithm>
-#define WIN32_LEAN_AND_MEAN
-#include <Windows.h>
-#include <Shlwapi.h>
 
 namespace Utils
 {
-	std::string GetWorkingDirectory()
+	#define WIN32_LEAN_AND_MEAN
+	#include <windows.h>
+	#include <Shlwapi.h>
+
+	inline std::string GetWorkingDirectory()
 	{
 		HMODULE hModule = GetModuleHandle( nullptr );
 		if ( hModule )
@@ -22,6 +25,6 @@ namespace Utils
 			return std::string( path );
 		}
 
-		return std::string( "" );
+		return "";
 	}
 } // end namespace

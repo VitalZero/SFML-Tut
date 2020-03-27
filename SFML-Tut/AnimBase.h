@@ -1,6 +1,5 @@
 #pragma once
-#include "TextureManager.h"
-#include "Directions.h"
+#include <string>
 
 class SpriteSheet;
 using Frame = unsigned int;

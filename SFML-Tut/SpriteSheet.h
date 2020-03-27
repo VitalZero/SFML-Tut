@@ -1,5 +1,10 @@
 #pragma once
-#include "AnimBase.h"
+#include <SFML/Graphics/Sprite.hpp>
+#include <SFML/Graphics/RenderWindow.hpp>
+#include "TextureManager.h"
+#include "AnimDirectional.h"
+#include "Utilities.h"
+#include <unordered_map>
 
 using Animations = std::unordered_map<std::string, AnimBase*>;
 

@@ -1,6 +1,7 @@
 #include "AnimBase.h"
 #include "SpriteSheet.h"
 
+	
 AnimBase::AnimBase()
 	:
 	frameCurrent( 0 ),

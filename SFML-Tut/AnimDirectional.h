@@ -1,5 +1,6 @@
 #pragma once
 #include "AnimBase.h"
+#include "Directions.h"
 
 class AnimDirectional : public AnimBase
 {

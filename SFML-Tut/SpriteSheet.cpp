@@ -1,7 +1,4 @@
 #include "SpriteSheet.h"
-#include <fstream>
-#include <sstream>
-#include "AnimDirectional.h"
 
 SpriteSheet::SpriteSheet( TextureManager * textMgr )
 	:
