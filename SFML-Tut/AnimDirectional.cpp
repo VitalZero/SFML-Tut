@@ -3,9 +3,13 @@
 
 void AnimDirectional::FrameStep()
 {
-	if ( frameStart > frameEnd )
+	if ( frameStart < frameEnd )
 	{
 		++frameCurrent;
+	}
+	else
+	{
+		--frameCurrent;
 	}
 
 	if ( (frameStart < frameEnd && frameCurrent > frameEnd) ||
